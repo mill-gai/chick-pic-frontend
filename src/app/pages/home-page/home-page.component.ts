@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { DropdownMenuComponent } from '../../components/dropdown-menu/dropdown-menu.component';
 import { HeaderComponent } from '../../components/header/header.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { S3Service } from '../../services/s3/s3.service';
 import { NgIf } from '@angular/common';
 import { NotificationComponent } from '../../components/notification/notification.component';
@@ -32,6 +33,7 @@ import { AutocompleteComponent } from '../../components/autocomplete/autocomplet
         ReactiveFormsModule,
         DropdownMenuComponent,
         HeaderComponent,
+        NavbarComponent,
         NgIf,
         NotificationComponent,
         MapComponent,

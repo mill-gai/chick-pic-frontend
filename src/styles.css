@@ -29,5 +29,9 @@ body {
     .image-border {
         @apply flex-none justify-center mx-auto border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0)]
     }
+    .bar {
+        @apply block w-6 h-1 mx-5 my-1 ease-in-out bg-current
+    }
+
     
   }
