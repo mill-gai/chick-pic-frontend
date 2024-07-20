@@ -1,3 +1,4 @@
+// const plugin = require('tailwindcss/plugin');
 const { transform } = require('typescript');
 
 /** @type {import('tailwindcss').Config} */
@@ -45,5 +46,11 @@ module.exports = {
         }
       },
     },
-    plugins: [],
+    plugins: [
+      // plugin(function({ addVariant }) {
+      //   addVariant('first', '&:nth-child(1)'),
+      //   addVariant('second', '&:nth-child(2)'),
+      //   addVariant('third', '&:nth-child(3)')
+      // })
+    ],
 }
