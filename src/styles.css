@@ -29,9 +29,33 @@ body {
     .image-border {
         @apply flex-none justify-center mx-auto border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0)]
     }
-    .bar {
-        @apply block w-6 h-1 mx-5 my-1 ease-in-out bg-current
+    .hamburger {
+        @apply block cursor-pointer hover:ease-in
     }
+    .bar {
+        @apply block w-6 h-1 mx-5 my-1 ease-in-out bg-black 
+    }
+    .bar1 {
+        @apply transition-transform ease-out group-hover:rotate-[45deg] group-hover:translate-y-[8px]
+    }
+    .bar2 {
+        @apply  group-hover:opacity-0
+    }
+    .bar3 {
+        @apply transition-transform ease-out group-hover:rotate-[-45deg] group-hover:translate-y-[-8px]
+    }
+    /* .hamburger {
+        @apply block cursor-pointer group-hover:[&>*:nth-child(1)]:opacity-0
+    } */
 
-    
+    /* .hamburger.active .bar:nth-child(2) {
+        @apply opacity-0
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        -webkit-transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
+    } */
   }
