@@ -30,19 +30,19 @@ body {
         @apply flex-none justify-center mx-auto border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0)]
     }
     .hamburger {
-        @apply block cursor-pointer hover:ease-in
+        @apply block cursor-pointer
     }
     .bar {
-        @apply block w-6 h-1 mx-5 my-1 ease-in-out bg-black 
+        @apply block w-6 h-1 mx-5 my-1 ease-in-out bg-black rounded-sm 
     }
     .bar1 {
-        @apply transition-transform ease-out group-hover:rotate-[45deg] group-hover:translate-y-[8px]
+        @apply transition-transform ease-out group-focus:rotate-[45deg] group-focus:translate-y-[8px]
     }
     .bar2 {
-        @apply  group-hover:opacity-0
+        @apply  group-focus:opacity-0
     }
     .bar3 {
-        @apply transition-transform ease-out group-hover:rotate-[-45deg] group-hover:translate-y-[-8px]
+        @apply transition-transform ease-out group-focus:rotate-[-45deg] group-focus:translate-y-[-8px]
     }
     /* .hamburger {
         @apply block cursor-pointer group-hover:[&>*:nth-child(1)]:opacity-0
