@@ -24,6 +24,7 @@ export class MapComponent implements OnInit {
         center: { lat: 40, lng: 10 },
         zoom: 2,
         mapId: '',
+        maxZoom: 6,
     };
     position = { lat: 45.5, lng: -73.6 };
     showContent = false;
@@ -49,14 +50,17 @@ export class MapComponent implements OnInit {
                 country = {
                     country: cur.country,
                     cities: [],
-                    lat: cur.lat,
-                    lng: cur.lng,
                 };
                 acc.push(country);
             }
             let city = country.cities.find((c: any) => c.city == cur.city);
             if (!city) {
-                city = { city: cur.city, images: [] };
+                city = {
+                    city: cur.city,
+                    images: [],
+                    lat: cur.lat,
+                    lng: cur.lng,
+                };
                 country.cities.push(city);
             }
             city.images.push({
