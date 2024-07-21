@@ -48,7 +48,7 @@ body {
         @apply transition-transform ease-out group-focus:rotate-[-45deg] group-focus:translate-y-[-8px]
     }
     .navbar {
-        @apply clear-both mt-2 p-4 rounded-md border border-gray-300 bg-white drop-shadow-lg 
+        @apply clear-both mt-2 p-2 rounded-md border border-gray-300 bg-white drop-shadow-lg 
     }
     /* .hamburger {
         @apply block cursor-pointer group-hover:[&>*:nth-child(1)]:opacity-0
