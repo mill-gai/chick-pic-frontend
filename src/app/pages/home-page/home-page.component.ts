@@ -158,14 +158,15 @@ export class HomePageComponent implements OnInit {
 
     onSelectCountry(input: Items): void {
         this.selectedCountry.set(input.value);
-        // const location = selectedLocation as Location;
-        // this.addImageForm.patchValue({ country: location.country });
-        // this.addImageForm.patchValue({ city: location.city });
-        // this.addImageForm.patchValue({ lat: location.lat });
-        // this.addImageForm.patchValue({ lng: location.lng });
     }
 
-    onSelectCity(input: Items): void {}
+    onSelectCity(input: Items): void {
+        const selectedCity = input as City;
+        this.addImageForm.patchValue({ country: this.selectedCountry() });
+        this.addImageForm.patchValue({ city: selectedCity.value });
+        this.addImageForm.patchValue({ lat: selectedCity.lat });
+        this.addImageForm.patchValue({ lng: selectedCity.lng });
+    }
 
     get name() {
         return this.addImageForm.get('name');
