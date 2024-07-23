@@ -21,8 +21,10 @@ import { ImageService } from '../../services/image/image.service';
 import { ImageInfo } from '../../model/image';
 import { Items } from '../../model/dropdown-item';
 import { LocationService } from '../../services/location/location.service';
-import { Location } from '../../model/location';
+import { City } from '../../model/location';
 import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
+import { signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-home-page',
@@ -53,7 +55,10 @@ export class HomePageComponent implements OnInit {
     fileObj: File;
     imageUrl: string | ArrayBuffer | null = null;
     keyword = 'value';
-    locations: Location[];
+    countires: Items[];
+    selectedCountry = signal('');
+    selectedCountry$ = toObservable(this.selectedCountry);
+    cities: City[];
     imageUrl1: string | null = null;
     @ViewChild(NotificationComponent)
     notiComponent: NotificationComponent;
@@ -83,22 +88,33 @@ export class HomePageComponent implements OnInit {
             image: [undefined, [Validators.required]],
         });
         this.locationService
-            .getAllLocations()
+            .getAllCountries()
             .pipe()
             .subscribe((response) => {
-                this.locations = response;
+                this.countires = response;
             });
+        this.selectedCountry$.subscribe((value) => {
+            this.locationService
+                .getCitiesByCountry(value)
+                .pipe()
+                .subscribe((response) => {
+                    this.cities = response;
+                });
+        });
+        // this.locationService
+        //     .getCitiesByCountry(this.selectedCountry())
+        //     .pipe()
+        //     .subscribe((response) => {
+        //         this.cities = response;
+        //     });
     }
 
     addImageHandler() {
-        // this.imageService.getAllImages().subscribe(data => {this.images = data});
         this.openForm = !this.openForm;
         this.isSubmitForm = false;
         this.addImageForm.reset();
         this.imageUrl = null;
     }
-
-    // private getFileUrl(file: File):
 
     onUploadImage(event: Event): void {
         const input = event.target as HTMLInputElement;
@@ -113,6 +129,9 @@ export class HomePageComponent implements OnInit {
     }
 
     onSubmit(): void {
+        console.log(this.countires);
+        console.log(this.cities);
+
         this.isSubmitForm = true;
         const image: ImageInfo = {
             title: this.addImageForm.get('name')?.value,
@@ -131,26 +150,22 @@ export class HomePageComponent implements OnInit {
                     this.notiComponent.playAnimation('success');
                     this.addImageHandler();
                 });
-            //this.notiComponent.playAnimation('valid input');
         } else {
-            // console.log("form is not valid");
             this.message = 'invalid input';
             this.notiComponent.playAnimation('invalid input');
         }
-        // const fileForm = new FormData();
-        // fileForm.append('file', this.fileObj);
-        // this.s3Service.uploadImage(this.fileObj);
-
-        // fileReader.readAsDataURL()
     }
 
-    onSelectLocation(selectedLocation: Items): void {
-        const location = selectedLocation as Location;
-        this.addImageForm.patchValue({ country: location.country });
-        this.addImageForm.patchValue({ city: location.city });
-        this.addImageForm.patchValue({ lat: location.lat });
-        this.addImageForm.patchValue({ lng: location.lng });
+    onSelectCountry(input: Items): void {
+        this.selectedCountry.set(input.value);
+        // const location = selectedLocation as Location;
+        // this.addImageForm.patchValue({ country: location.country });
+        // this.addImageForm.patchValue({ city: location.city });
+        // this.addImageForm.patchValue({ lat: location.lat });
+        // this.addImageForm.patchValue({ lng: location.lng });
     }
+
+    onSelectCity(input: Items): void {}
 
     get name() {
         return this.addImageForm.get('name');

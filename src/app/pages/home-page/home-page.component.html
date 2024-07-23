@@ -46,13 +46,21 @@
               formControlName="description">
             </textarea>
             <div class="inline-flex gap-4 flex-wrap">
-              <div class="place-self-start">Location*</div>
-              <!-- <app-dropdown-menu [options]="locations" [isInvalid]="(country.invalid || city.invalid) && isSubmitForm" (selectEvent)="onSelectLocation($event)"></app-dropdown-menu> -->
+              <div class="place-self-start">Country*</div>
               <app-autocomplete 
-                [data]="locations" 
+                [data]="countires" 
                 [keyword]="keyword"
                 [isInvalid]="(country.invalid || city.invalid) && isSubmitForm"
-                (selectEvent)="onSelectLocation($event)">
+                (selectEvent)="onSelectCountry($event)">
+              </app-autocomplete>
+            </div>
+            <div class="inline-flex gap-4 flex-wrap">
+              <div class="place-self-start">City*</div>
+              <app-autocomplete 
+                [data]="cities" 
+                [keyword]="keyword"
+                [isInvalid]="(country.invalid || city.invalid) && isSubmitForm"
+                (selectEvent)="onSelectCity($event)">
               </app-autocomplete>
             </div>
            
