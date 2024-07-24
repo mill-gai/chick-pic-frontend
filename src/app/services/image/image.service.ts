@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ImageInfo } from '../../model/image';
+import { ImageByPage, ImageInfo, ImageLocation } from '../../model/image';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +24,7 @@ export class ImageService {
         formData.append('file', file);
         // const body = { file: file, imageRequest: image};
         return this.httpClient.post<string>(
-            'http://localhost:9000/api/image',
+            'http://localhost:8080/api/image',
             formData,
             httpOptions
         );
@@ -32,14 +32,27 @@ export class ImageService {
 
     getAllImages(): Observable<ImageInfo[]> {
         return this.httpClient.get<Array<ImageInfo>>(
-            'http://localhost:9000/api/image/getAllImages'
+            'http://localhost:8080/api/image/getAllImages'
         );
     }
 
     getImageUrls(fileNames: string[]): Observable<string[]> {
         return this.httpClient.get<Array<string>>(
-            'http://localhost:9000/api/image/getImageUrls',
+            'http://localhost:8080/api/image/getImageUrls',
             { params: { fileNames: fileNames } }
+        );
+    }
+
+    getImageByPage(city: string, page: number, size: number) {
+        return this.httpClient.get<ImageByPage>(
+            'http://localhost:8080/api/image/getImageByPage',
+            { params: { city: city, page: page, size: size } }
+        );
+    }
+
+    getImageDistinctLocation() {
+        return this.httpClient.get<Array<ImageLocation>>(
+            'http://localhost:8080/api/image/getDistinctLocation'
         );
     }
 }

@@ -9,6 +9,18 @@ export interface ImageInfo {
     fileUrl?: string;
 }
 
+export interface ImageByPage {
+    images: ImageInfo[];
+    isLast: boolean;
+}
+
+export interface ImageLocation {
+    country: string;
+    city: string;
+    lat: number;
+    lng: number;
+}
+
 export type Image = {
     title: string;
     description: string;
@@ -16,12 +28,12 @@ export type Image = {
     fileUrl: string;
 };
 
-export type ImageByLocation = {
-    country: string;
-    cities: {
-        city: string;
-        images: Image[];
-        lat: number;
-        lng: number;
-    }[];
-};
+// export type ImageByLocation = {
+//     country: string;
+//     cities: {
+//         city: string;
+//         images: Image[];
+//         lat: number;
+//         lng: number;
+//     }[];
+// };
