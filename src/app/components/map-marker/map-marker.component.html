@@ -4,15 +4,12 @@
         <div id="outsidePopup" class="absolute flex justify-center w-full h-full items-center box-border animate-fadeInUp rounded-lg text-center">
             <div class="m-2  rounded-lg bg-white">
                 <div class="w-80 h-96 m-2  p-2 overflow-y-scroll">
-                        <!-- <button class="absolute inset-y-0 right-0 hover:scale-90 focus:opacity-25 rounded-full bg-white" (click)="onClickHandler()">
-                            <fa-icon [icon]="faCircleXmark" size="2x" style="color: rgb(62, 62, 62);"></fa-icon>
-                        </button> -->
                         <div class="p-3 pl-5 m-2 bg-white">
                             @for(image of images; track image.fileName) {
                                 <!-- <div class="flex justify-center	items-center box-border w-3"> -->
                                 
                                     <div class="image-border">
-                                        <img class="w-96" src="{{image.fileUrl}}" (error)="getImageUrl([image.fileName])">
+                                        <img class="w-96" src="{{image.fileUrl}}">
                                     </div>
                                     <div class="m-5 text-center">
                                         <b>{{image.title}}</b>
@@ -20,7 +17,16 @@
                                     </div>
                                 <!-- </div>    -->
                             }
+                            @if(!this.isLastPage){
+                                <button class="" (click)="onClickViewMoreHandler()">
+                                    Load More
+                                </button>
+                            } @else {
+                                <div> End </div>
+                            }
+                           
                         </div>
+
                 </div> 
             </div>
             
