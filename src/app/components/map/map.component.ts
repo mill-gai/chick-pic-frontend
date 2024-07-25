@@ -1,10 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ImageByLocation, ImageInfo } from '../../model/image';
+import { ImageInfo, ImageLocation } from '../../model/image';
 import { ImageService } from '../../services/image/image.service';
 import { MapMarkerComponent } from '../map-marker/map-marker.component';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-map',
@@ -27,53 +28,55 @@ export class MapComponent implements OnInit {
         maxZoom: 6,
     };
     position = { lat: 45.5, lng: -73.6 };
-    showContent = false;
     faCircleXmark = faCircleXmark;
-    images: ImageByLocation[] = [];
+    imageLocations: ImageLocation[] = [];
 
     ngOnInit(): void {
         this.imageService
-            .getAllImages()
+            .getImageDistinctLocation()
             .pipe()
             .subscribe((response) => {
-                console.log(response);
-                this.images = this.groupImageByLocation(response);
-                console.log(this.images);
+                this.imageLocations = response;
             });
+
+        // this.imageService
+        //     .getAllImages()
+        //     .pipe()
+        //     .subscribe((response) => {
+        //         console.log(response);
+        //         this.images = this.groupImageByLocation(response);
+        //         console.log(this.images);
+        //     });
     }
 
-    groupImageByLocation(imageResponse: Array<ImageInfo>): ImageByLocation[] {
-        const res: ImageByLocation[] = imageResponse.reduce((acc, cur) => {
-            let country = acc.find((c: any) => c.country == cur.country);
-            if (!country) {
-                // country not in the list
-                country = {
-                    country: cur.country,
-                    cities: [],
-                };
-                acc.push(country);
-            }
-            let city = country.cities.find((c: any) => c.city == cur.city);
-            if (!city) {
-                city = {
-                    city: cur.city,
-                    images: [],
-                    lat: cur.lat,
-                    lng: cur.lng,
-                };
-                country.cities.push(city);
-            }
-            city.images.push({
-                title: cur.title,
-                description: cur.description,
-                fileName: cur.fileName,
-            });
-            return acc;
-        }, []);
-        return res;
-    }
-
-    onClickHandler() {
-        this.showContent = !this.showContent;
-    }
+    // groupImageByLocation(imageResponse: Array<ImageInfo>): ImageByLocation[] {
+    //     const res: ImageByLocation[] = imageResponse.reduce((acc, cur) => {
+    //         let country = acc.find((c: any) => c.country == cur.country);
+    //         if (!country) {
+    //             // country not in the list
+    //             country = {
+    //                 country: cur.country,
+    //                 cities: [],
+    //             };
+    //             acc.push(country);
+    //         }
+    //         let city = country.cities.find((c: any) => c.city == cur.city);
+    //         if (!city) {
+    //             city = {
+    //                 city: cur.city,
+    //                 images: [],
+    //                 lat: cur.lat,
+    //                 lng: cur.lng,
+    //             };
+    //             country.cities.push(city);
+    //         }
+    //         city.images.push({
+    //             title: cur.title,
+    //             description: cur.description,
+    //             fileName: cur.fileName,
+    //         });
+    //         return acc;
+    //     }, []);
+    //     return res;
+    // }
 }

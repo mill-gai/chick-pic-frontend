@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Location } from '../../model/location';
+import { City } from '../../model/location';
 import { Items } from '../../model/dropdown-item';
 
 @Injectable({
@@ -16,9 +16,9 @@ export class LocationService {
         );
     }
 
-    getCitiesByCountry(country: string): Observable<Location> {
-        return this.httpClient.get<Location>(
-            'http://localhost:9000/api/location/getCitiesByCountry',
+    getCitiesByCountry(country: string): Observable<City[]> {
+        return this.httpClient.get<City[]>(
+            'http://localhost:8081/api/location/getCitiesByCountry',
             { params: { country: country } }
         );
     }
