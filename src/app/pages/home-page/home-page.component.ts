@@ -129,9 +129,6 @@ export class HomePageComponent implements OnInit {
     }
 
     onSubmit(): void {
-        console.log(this.countires);
-        console.log(this.cities);
-
         this.isSubmitForm = true;
         const image: ImageInfo = {
             title: this.addImageForm.get('name')?.value,
@@ -158,6 +155,10 @@ export class HomePageComponent implements OnInit {
 
     onSelectCountry(input: Items): void {
         this.selectedCountry.set(input.value);
+        // reset city
+        this.addImageForm.get('city')?.reset;
+        this.addImageForm.get('lat')?.reset;
+        this.addImageForm.get('lng')?.reset;
     }
 
     onSelectCity(input: Items): void {
