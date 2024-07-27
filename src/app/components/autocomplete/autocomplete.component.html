@@ -1,18 +1,21 @@
-<mat-form-field>
-  <!-- <mat-label>Country</mat-label> -->
-  <input #inputAutoComplete
-         type="text"
-         matInput
-         [formControl]="myControl"
-         [matAutocomplete]="auto"
-         (input)="filter()"
-         (focus)="filter()">
-  <mat-autocomplete requireSelection #auto="matAutocomplete" (optionSelected)="onSelectOption()">
-    @for (d of fileteredData; track d) {
-      <mat-option [value]="d.value">{{d.value}}</mat-option>
-    }
-  </mat-autocomplete> 
-</mat-form-field>
+<div class="border-2 rounded {{isInvalid? 'border-red-500': 'border-black' }}">
+
+    <!-- <mat-label>Country</mat-label> -->
+    <input #inputAutoComplete
+          class="p-2"
+          type="text"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          (input)="filter()"
+          (focus)="filter()">
+    <mat-autocomplete requireSelection #auto="matAutocomplete" (optionSelected)="onSelectOption()">
+      @for (d of fileteredData; track d) {
+        <mat-option [value]="d.value">{{d.value}}</mat-option>
+      }
+    </mat-autocomplete> 
+
+</div>
 <!-- <div class="border-2 rounded {{isInvalid? 'border-red-500': 'border-black' }}"> 
     <ng-autocomplete
       [data]="data"
