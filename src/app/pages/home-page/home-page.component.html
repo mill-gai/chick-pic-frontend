@@ -24,17 +24,23 @@
       </button>
       <div class="overflow-y-scroll h-[100%]">
         <h2 class="text-2xl text-base font-semibold leading-7 text-gray-900">🐥Upload Chicken Image🐤</h2>
-        <!-- <p class="mt-1 text-sm leading-6 text-gray-600">Upload Image,</p> -->
         <form [formGroup]="addImageForm" (ngSubmit)="onSubmit()">
           <div class="grid grid-cols-1 gap-4 m-8">
-            <div class="place-self-start">Image Name*</div>
+            <div class="place-self-start">Image Name</div>
             <input 
+              type="text"
+              id="fname"
+              name="name"
+              class="input-primary border-black"
+              formControlName="name"
+              required>
+              <!-- <input 
               type="text"
               id="fname"
               name="name"
               class="input-primary {{ name.invalid && isSubmitForm? 'border-red-500': 'border-black' }}"
               formControlName="name"
-              required>
+              required> -->
             <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
               <div *ngIf="name?.errors?.['required']">
                 Name is required.
@@ -42,7 +48,7 @@
             </div> -->
             <div class="place-self-start">Image Description</div>
             <textarea
-              class="input-primary {{ description.invalid && isSubmitForm? 'border-red-500': 'border-black' }}"
+              class="input-primary border-black"
               formControlName="description">
             </textarea>
             <div class="inline-flex gap-4 flex-wrap">
@@ -102,7 +108,7 @@
                 <div class="text-center">
                   <div class="mt-4 flex text-sm leading-6 text-gray-600">
                     <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-yellow-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-yellow-500 focus-within:ring-offset-2 hover:text-yellow-400">
-                      <span>Upload a file</span>
+                      <span>Upload a file *</span>
                       <input 
                           id="file-upload"
                           name="file-upload"

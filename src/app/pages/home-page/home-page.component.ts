@@ -79,7 +79,7 @@ export class HomePageComponent implements OnInit {
         private locationService: LocationService
     ) {
         this.addImageForm = this.fb.group({
-            name: ['', [Validators.required]],
+            name: [''],
             description: [''],
             country: ['', [Validators.required]],
             city: ['', [Validators.required]],
