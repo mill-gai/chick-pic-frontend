@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, WritableSignal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
@@ -55,10 +55,12 @@ export class HomePageComponent implements OnInit {
     fileObj: File;
     imageUrl: string | ArrayBuffer | null = null;
     keyword = 'value';
-    countires: Items[];
+    countires: WritableSignal<Items[]> = signal<Items[]>([]);
+    countries$ = toObservable(this.countires);
     selectedCountry = signal('');
     selectedCountry$ = toObservable(this.selectedCountry);
-    cities: City[];
+    cities: WritableSignal<City[]> = signal<City[]>([]);
+    cities$ = toObservable(this.cities);
     imageUrl1: string | null = null;
     @ViewChild(NotificationComponent)
     notiComponent: NotificationComponent;
@@ -91,14 +93,14 @@ export class HomePageComponent implements OnInit {
             .getAllCountries()
             .pipe()
             .subscribe((response) => {
-                this.countires = response;
+                this.countires.set(response);
             });
         this.selectedCountry$.subscribe((value) => {
             this.locationService
                 .getCitiesByCountry(value)
                 .pipe()
                 .subscribe((response) => {
-                    this.cities = response;
+                    this.cities.set(response);
                 });
         });
         // this.locationService

@@ -55,6 +55,7 @@
               <div class="place-self-start">Country*</div>
               <app-autocomplete 
                 [data]="countires" 
+                [data$]="countries$"
                 [keyword]="keyword"
                 [isInvalid]="(country.invalid || city.invalid) && isSubmitForm"
                 (selectEvent)="onSelectCountry($event)">
@@ -64,6 +65,7 @@
               <div class="place-self-start">City*</div>
               <app-autocomplete 
                 [data]="cities" 
+                [data$]="cities$"
                 [keyword]="keyword"
                 [isInvalid]="(country.invalid || city.invalid) && isSubmitForm"
                 (selectEvent)="onSelectCity($event)">
