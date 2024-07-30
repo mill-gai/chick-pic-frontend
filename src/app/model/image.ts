@@ -7,6 +7,7 @@ export interface ImageInfo {
     lng: number;
     fileName?: string;
     fileUrl?: string;
+    submissionDate?: Date;
 }
 
 export interface ImageByPage {

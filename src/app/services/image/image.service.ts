@@ -43,10 +43,10 @@ export class ImageService {
         );
     }
 
-    getImageByPage(city: string, page: number, size: number) {
+    getImageByPage(country: string, city: string, page: number, size: number) {
         return this.httpClient.get<ImageByPage>(
             'http://localhost:8080/api/image/getImageByPage',
-            { params: { city: city, page: page, size: size } }
+            { params: { country: country, city: city, page: page, size: size } }
         );
     }
 

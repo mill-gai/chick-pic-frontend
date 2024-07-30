@@ -6,11 +6,12 @@ import { Image, ImageInfo } from '../../model/image';
 import { Position } from '../../model/position';
 import { ImageService } from '../../services/image/image.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-map-marker',
     standalone: true,
-    imports: [MapAdvancedMarker, FontAwesomeModule],
+    imports: [MapAdvancedMarker, FontAwesomeModule, CommonModule],
     templateUrl: './map-marker.component.html',
     styleUrl: './map-marker.component.css',
 })
@@ -33,7 +34,12 @@ export class MapMarkerComponent implements OnInit {
         this.page$.subscribe((curPage) => {
             console.log('update page');
             this.imageService
-                .getImageByPage(this.city, this.page(), this.pageSize)
+                .getImageByPage(
+                    this.country,
+                    this.city,
+                    this.page(),
+                    this.pageSize
+                )
                 .pipe()
                 .subscribe((response) => {
                     const prevLen = this.images.length;
