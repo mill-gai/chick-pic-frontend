@@ -24,7 +24,7 @@ export class ImageService {
         formData.append('file', file);
         // const body = { file: file, imageRequest: image};
         return this.httpClient.post<string>(
-            'http://localhost:8080/api/image',
+            'http://localhost:9000/api/image',
             formData,
             httpOptions
         );
@@ -32,27 +32,27 @@ export class ImageService {
 
     getAllImages(): Observable<ImageInfo[]> {
         return this.httpClient.get<Array<ImageInfo>>(
-            'http://localhost:8080/api/image/getAllImages'
+            'http://localhost:9000/api/image/getAllImages'
         );
     }
 
     getImageUrls(fileNames: string[]): Observable<string[]> {
         return this.httpClient.get<Array<string>>(
-            'http://localhost:8080/api/image/getImageUrls',
+            'http://localhost:9000/api/image/getImageUrls',
             { params: { fileNames: fileNames } }
         );
     }
 
     getImageByPage(country: string, city: string, page: number, size: number) {
         return this.httpClient.get<ImageByPage>(
-            'http://localhost:8080/api/image/getImageByPage',
+            'http://localhost:9000/api/image/getImageByPage',
             { params: { country: country, city: city, page: page, size: size } }
         );
     }
 
     getImageDistinctLocation() {
         return this.httpClient.get<Array<ImageLocation>>(
-            'http://localhost:8080/api/image/getDistinctLocation'
+            'http://localhost:9000/api/image/getDistinctLocation'
         );
     }
 }

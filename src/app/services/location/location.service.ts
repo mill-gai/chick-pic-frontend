@@ -12,13 +12,13 @@ export class LocationService {
 
     getAllCountries(): Observable<Items[]> {
         return this.httpClient.get<Items[]>(
-            'http://localhost:8081/api/location/getAllCountries'
+            'http://localhost:9000/api/location/getAllCountries'
         );
     }
 
     getCitiesByCountry(country: string): Observable<City[]> {
         return this.httpClient.get<City[]>(
-            'http://localhost:8081/api/location/getCitiesByCountry',
+            'http://localhost:9000/api/location/getCitiesByCountry',
             { params: { country: country } }
         );
     }
