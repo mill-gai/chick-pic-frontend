@@ -1,7 +1,8 @@
 <div>
-    <select class="input-primary {{isInvalid? 'border-red-500': 'border-black' }}" [(ngModel)]="selectedOption" (change)="onSelectOption()">
-        @for (option of options; track option.id) {
-          <option>{{ option.value }}</option>
+    <select class="input-primary {{isInvalid? 'border-red-500': 'border-black' }}" [(ngModel)]="selectedItem" (change)="onSelectOption()">
+      <option *ngFor="let option of options" [ngValue]="option">{{ option.value }}</option>
+      @for (option of options; track option.id) {
+          <option value={{option}}>{{ option.value }}</option>
         }
     </select>
 </div>

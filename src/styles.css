@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply font-mono
+}
+
 @layer components {
     /* .btn-primary {
         @apply m-4 py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
@@ -25,5 +29,39 @@
     .image-border {
         @apply flex-none justify-center mx-auto border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0)]
     }
-    
+    .menu-container {
+        @apply mr-2 absolute [&>*:nth-child(2)]:hidden [&>*:nth-child(2)]:focus-within:block
+    }
+    .hamburger {
+        @apply cursor-pointer float-right
+    }
+    .bar {
+        @apply block w-6 h-1 mx-5 my-1 ease-in-out bg-black rounded-sm 
+    }
+    .bar1 {
+        @apply transition-transform ease-out group-focus:rotate-[45deg] group-focus:translate-y-[8px]
+    }
+    .bar2 {
+        @apply  group-focus:opacity-0
+    }
+    .bar3 {
+        @apply transition-transform ease-out group-focus:rotate-[-45deg] group-focus:translate-y-[-8px]
+    }
+    .navbar {
+        @apply clear-both mt-2 p-2 rounded-md border border-gray-300 bg-white drop-shadow-lg 
+    }
+    /* .hamburger {
+        @apply block cursor-pointer group-hover:[&>*:nth-child(1)]:opacity-0
+    } */
+
+    /* .hamburger.active .bar:nth-child(2) {
+        @apply opacity-0
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        -webkit-transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
+    } */
   }

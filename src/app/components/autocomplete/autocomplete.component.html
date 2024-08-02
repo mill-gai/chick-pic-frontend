@@ -1,0 +1,33 @@
+<div class="border-2 rounded border-black">
+    <input #inputAutoComplete
+          class="p-2"
+          type="text"
+          matInput
+          [formControl]="formControl"
+          [matAutocomplete]="auto"
+          (input)="filter()"
+          (focus)="filter()">
+    <mat-autocomplete requireSelection #auto="matAutocomplete">
+      @for (d of fileteredData; track d) {
+        <mat-option [value]="d.value">{{d.value}}</mat-option>
+      }
+    </mat-autocomplete> 
+</div>
+<!-- <div class="border-2 rounded {{isInvalid? 'border-red-500': 'border-black' }}"> 
+    <ng-autocomplete
+      [data]="data"
+      [searchKeyword]="keyword"
+      [historyIdentifier]="null" 
+      (selected)="onSelectOption($event)"
+      historyIdentifier="countries"
+      [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate"
+    ></ng-autocomplete>
+  </div>
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.value"></a>
+  </ng-template>
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+ -->

@@ -1,15 +1,24 @@
 
 <google-map [options]="options" width="100%">
-    <map-advanced-marker [position]="position" (mapClick)="onClickHandler()"></map-advanced-marker>
+    @for (img of imageLocations; track img) {   
+        <app-map-marker 
+            [country]="img.country" 
+            [city]="img.city" 
+            [position]="{lat: img.lat, lng: img.lng}">
+        </app-map-marker>
+    }
+    <!-- <map-advanced-marker [position]="position" (mapClick)="onClickHandler()"></map-advanced-marker> -->
 </google-map>
-@if(showContent){
+
+
+
+<!-- @if(showContent){
     <div class="overlay-container">
         <div class="absolute mx-[10%] my-[10%] inset-x-0 p-4 inset-y-0 animate-fadeInUp bg-white rounded-lg text-center">
             <button class="absolute right-[4%] top-4 hover:scale-90 focus:opacity-25 rounded-full bg-white" (click)="onClickHandler()">
                 <fa-icon [icon]="faCircleXmark" size="2x" style="color: rgb(62, 62, 62);"></fa-icon>
             </button>
             <div class="h-[100%] overflow-y-scroll">    
-            <!-- <div class="grid grid-cols-1 gap-4 place-items-center mx-[10%] my-10 p-4 animate-fadeInUp bg-white rounded-lg"> -->
                 <div class="flex-container m-4 border-2 p-3 pb-4 border-black bg-yellow-200">
                     <div class="image-border">
                         <img class="w-96" src="https://media.istockphoto.com/id/2043980026/vector/hand-drawn-doodled-chickens-on-a-transparent-background.jpg?b=1&s=612x612&w=0&k=20&c=rBkvMuL1I4XKjSv4a1vur0vqGrYTp3u48K_b5dCdEQY=" alt="Image from S3">
@@ -41,62 +50,5 @@
             </div>
         </div>
     </div>
-
-    <!-- 
-    https://thegingerhome.com/wp-content/uploads/2021/06/IMG_5810.jpg
-    https://ogden_images.s3.amazonaws.com/www.iamcountryside.com/images/sites/3/2019/07/11083422/caring-for-baby-chicks-broody-hen.jpg
-    -->
-    <!-- <ul class="container">
-        <li class="flex flex1">1: flex-basis test</li>
-        <li class="flex flex2">2: flex-basis test</li>
-        <li class="flex flex3">3: flex-basis test</li>
-        <li class="flex flex4">4: flex-basis test</li>
-        <li class="flex flex5">5: flex-basis test</li>
-      </ul>
-      
-      <ul class="container">
-        <li class="flex flex6">6: flex-basis test</li>
-      </ul> -->
 }
-
-<!--
-{ 
-    Country: [
-        Canada: [
-            city: [
-                Montreal : { 
-                    lat 
-                    long
-                    images: [
-                        {imgUrl, name, des},
-                        {imgUrl, name, des}
-                    ]
-                }
-            ]
-        ],
-        Thailand
-    ]
-}
-
-{
-    Canda: [ 
-                { 
-                    city: Montreal, 
-                    lat: 123, 
-                    long: 123, 
-                    images: [
-                        {imgUrl, name, des}
-                    ]
-                },
-                {
-                    city: Toronto,
-                    lat: 456,
-                    lomg: 456,
-                    images: [
-                        {imgUrl, name, des},
-                        {imgUrl, name, des}
-                    ]                
-                }
-            ]
-}
--->
+ -->

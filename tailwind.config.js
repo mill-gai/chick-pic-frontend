@@ -1,9 +1,11 @@
+// const plugin = require('tailwindcss/plugin');
 const { transform } = require('typescript');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./src/**/*.{html,ts}"],
     theme: {
+      fontFamily: {mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']},
       extend: {
         animation: {
           'spin-slow': 'spin 3s linear infinite',
@@ -44,5 +46,11 @@ module.exports = {
         }
       },
     },
-    plugins: [],
+    plugins: [
+      // plugin(function({ addVariant }) {
+      //   addVariant('first', '&:nth-child(1)'),
+      //   addVariant('second', '&:nth-child(2)'),
+      //   addVariant('third', '&:nth-child(3)')
+      // })
+    ],
 }

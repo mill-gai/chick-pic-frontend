@@ -1,13 +1,11 @@
 <app-header></app-header>
-<!-- <div>
-  <img [src]="imageUrl1" (error)="handleImageError()" alt="Image from S3">
-</div> -->
+<!-- <app-navbar></app-navbar> -->
 <div class="flex flex-col justify-center items-center text-center">
   <div class="mt-[5%] mx-[10%]">
-      <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Chick Pic</h1>
-      <p class="mt-6 text-lg leading-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempus tortor, ac luctus felis. Quisque ornare ipsum eget dolor porttitor, quis cursus ipsum tincidunt.</p>
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">🐣Chicken Near Me🐔🔍</h1>
+      <!-- <p class="mt-6 text-lg leading-8 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempus tortor, ac luctus felis. Quisque ornare ipsum eget dolor porttitor, quis cursus ipsum tincidunt.</p> -->
   </div>
-  <button class="btn-primary" (click)="addImageHandler()"> Add Image </button>
+  <button class="btn-primary" (click)="addImageHandler()"> Upload Image </button>
  
   <div class="relative top-4 h-60 w-[90%]">
     <div class="absolute top-0 inset-x-0">
@@ -25,18 +23,23 @@
         <fa-icon [icon]="faCircleXmark" size="2x" style="color: rgb(62, 62, 62);"></fa-icon>
       </button>
       <div class="overflow-y-scroll h-[100%]">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Upload Chicken Image</h2>
-        <p class="mt-1 text-sm leading-6 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempus tortor, ac luctus felis.</p>
+        <h2 class="text-2xl text-base font-semibold leading-7 text-gray-900">🐥Upload Chicken Image🐤</h2>
         <form [formGroup]="addImageForm" (ngSubmit)="onSubmit()">
           <div class="grid grid-cols-1 gap-4 m-8">
-            <div class="place-self-start">Image Name*</div>
+            <div class="place-self-start">Image Name</div>
             <input 
+              type="text"
+              id="fname"
+              name="name"
+              class="input-primary border-black"
+              formControlName="name">
+              <!-- <input 
               type="text"
               id="fname"
               name="name"
               class="input-primary {{ name.invalid && isSubmitForm? 'border-red-500': 'border-black' }}"
               formControlName="name"
-              required>
+              required> -->
             <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
               <div *ngIf="name?.errors?.['required']">
                 Name is required.
@@ -44,18 +47,34 @@
             </div> -->
             <div class="place-self-start">Image Description</div>
             <textarea
-              class="input-primary {{ description.invalid && isSubmitForm? 'border-red-500': 'border-black' }}"
+              class="input-primary border-black"
               formControlName="description">
             </textarea>
             <div class="inline-flex gap-4 flex-wrap">
-              <div class="place-self-start">Location*</div>
-              <app-dropdown-menu [options]="locations" [isInvalid]="location.invalid && isSubmitForm" (selectEvent)="onSelectLocation($event)"></app-dropdown-menu>
+              <div class="place-self-start">Country*</div>
+              <app-autocomplete 
+                [data]="countires" 
+                [data$]="countries$"
+                [keyword]="keyword"
+                [isInvalid]="(country.invalid || city.invalid) && isSubmitForm"
+                (selectEvent)="onSelectCountry($event)">
+              </app-autocomplete>
+            </div>
+            <div class="inline-flex gap-4 flex-wrap">
+              <div class="place-self-start">City*</div>
+              <app-autocomplete 
+                [data]="cities" 
+                [data$]="cities$"
+                [keyword]="keyword"
+                [isInvalid]="(country.invalid || city.invalid) && isSubmitForm"
+                (selectEvent)="onSelectCity($event)">
+              </app-autocomplete>
             </div>
            
             <div class="flex flex-col justify-center items-center">
               @if(imageUrl)
               {
-                <div class="mt-2 h-80 w-80 justify-center rounded-lg">
+                <div class="mt-2 h-80 w-80 justify-center rounded-lg overflow-y-scroll">
                   <img class="w-[100%]" src={{imageUrl}}>
                 </div>
               } @else {
@@ -90,7 +109,7 @@
                 <div class="text-center">
                   <div class="mt-4 flex text-sm leading-6 text-gray-600">
                     <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-yellow-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-yellow-500 focus-within:ring-offset-2 hover:text-yellow-400">
-                      <span>Upload a file</span>
+                      <span>Upload a file *</span>
                       <input 
                           id="file-upload"
                           name="file-upload"
