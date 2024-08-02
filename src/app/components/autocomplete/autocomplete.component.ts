@@ -38,29 +38,29 @@ export class AutocompleteComponent {
     @Output() selectEvent = new EventEmitter<Items>();
     @ViewChild('inputAutoComplete') input: ElementRef<HTMLInputElement>;
     fileteredData: Items[];
-    myControl = new FormControl('');
+    formControl = new FormControl('');
     // options: WritableSignal<Items[]> = signal<Items[]>([]);
     @Input() data$: Observable<Items[]>;
 
     ngOnInit(): void {
         this.fileteredData = this.data();
         this.data$.subscribe(() => {
-            console.log(
-                'dropdown data change, cur val: ' + this.myControl.value
-            );
-            this.myControl.reset();
+            this.formControl.reset();
+        });
+        this.formControl.valueChanges.subscribe((v) => {
+            if (this.data) {
+                this.selectEvent.emit(this.data().find((d) => d.value == v));
+            } else {
+                this.selectEvent.emit(null);
+            }
         });
     }
 
-    // onSelectOption(item): void {
-    //     this.selectEvent.emit(item);
+    // onSelectOption(): void {
+    //     //this.selectEvent.emit(this.myControl.value as Item);
+    //     const val: string = this.myControl.value;
+    //     this.selectEvent.emit(this.data().find((d) => d.value == val));
     // }
-
-    onSelectOption(): void {
-        //this.selectEvent.emit(this.myControl.value as Item);
-        const val: string = this.myControl.value;
-        this.selectEvent.emit(this.data().find((d) => d.value == val));
-    }
 
     filter(): void {
         const filterValue = this.input.nativeElement.value.toLowerCase();

@@ -141,6 +141,8 @@ export class HomePageComponent implements OnInit {
             lng: this.addImageForm.get('lng')?.value,
         };
 
+        console.log(image);
+
         if (this.addImageForm.valid) {
             this.imageService
                 .uploadImage(image, this.fileObj)
@@ -155,20 +157,34 @@ export class HomePageComponent implements OnInit {
         }
     }
 
-    onSelectCountry(input: Items): void {
-        this.selectedCountry.set(input.value);
+    resetFormLocation(): void {
         // reset city
-        this.addImageForm.get('city')?.reset;
-        this.addImageForm.get('lat')?.reset;
-        this.addImageForm.get('lng')?.reset;
+        this.addImageForm.get('city')?.reset();
+        this.addImageForm.get('lat')?.reset();
+        this.addImageForm.get('lng')?.reset();
+    }
+
+    onSelectCountry(input: Items): void {
+        if (input) {
+            this.selectedCountry.set(input.value);
+        } else {
+            this.selectedCountry.set(null);
+        }
+        this.addImageForm.patchValue({ country: this.selectedCountry() });
+        this.resetFormLocation();
     }
 
     onSelectCity(input: Items): void {
-        const selectedCity = input as City;
-        this.addImageForm.patchValue({ country: this.selectedCountry() });
-        this.addImageForm.patchValue({ city: selectedCity.value });
-        this.addImageForm.patchValue({ lat: selectedCity.lat });
-        this.addImageForm.patchValue({ lng: selectedCity.lng });
+        if (input) {
+            const selectedCity = input as City;
+            // this.addImageForm.patchValue({ country: this.selectedCountry() });
+            this.addImageForm.patchValue({ city: selectedCity.value });
+            this.addImageForm.patchValue({ lat: selectedCity.lat });
+            this.addImageForm.patchValue({ lng: selectedCity.lng });
+        } else {
+            // city is diselect
+            this.resetFormLocation();
+        }
     }
 
     get name() {
