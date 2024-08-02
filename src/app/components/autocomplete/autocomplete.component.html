@@ -1,20 +1,17 @@
-<div class="border-2 rounded {{isInvalid? 'border-red-500': 'border-black' }}">
-
-    <!-- <mat-label>Country</mat-label> -->
+<div class="border-2 rounded border-black">
     <input #inputAutoComplete
           class="p-2"
           type="text"
           matInput
-          [formControl]="myControl"
+          [formControl]="formControl"
           [matAutocomplete]="auto"
           (input)="filter()"
           (focus)="filter()">
-    <mat-autocomplete requireSelection #auto="matAutocomplete" (optionSelected)="onSelectOption()">
+    <mat-autocomplete requireSelection #auto="matAutocomplete">
       @for (d of fileteredData; track d) {
         <mat-option [value]="d.value">{{d.value}}</mat-option>
       }
     </mat-autocomplete> 
-
 </div>
 <!-- <div class="border-2 rounded {{isInvalid? 'border-red-500': 'border-black' }}"> 
     <ng-autocomplete
